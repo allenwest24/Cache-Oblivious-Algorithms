@@ -62,7 +62,6 @@ int main() {
     double C[N][N];
     double D[N][N];
     double E[N][N];
-    double F[N][N];
     for(int ii = 0; ii < N; ++ii){
         for(int jj = 0; jj < N; ++jj){
             A[ii][jj] = (double)rand() / (double)RAND_MAX;
@@ -70,7 +69,6 @@ int main() {
 	    C[ii][jj] = (double)rand() / (double)RAND_MAX;
             D[ii][jj] = (double)rand() / (double)RAND_MAX;
             E[ii][jj] = (double)rand() / (double)RAND_MAX;
-	    F[ii][jj] = (double)rand() / (double)RAND_MAX;
         }
     }
     int kk, ll; 
@@ -94,15 +92,15 @@ int main() {
     printf("Before cacheObliviousTranspose() \n");
     for (kk = 0; kk < N; kk++) {
         for (ll = 0; ll < N; ll ++) {
-            printf("%f ", D[kk][ll]);
+            printf("%f ", C[kk][ll]);
 	}
 	printf("\n");
     }
-    cacheObliviousTranspose(0, N, 0, N,(double*) D, (double*) E);
+    cacheObliviousTranspose(0, N, 0, N,(double*) C, (double*) D);
     printf("After cacheObliviousTranspose()\n");
     for (kk = 0; kk < N; kk++) {
         for (ll = 0; ll < N; ll++) {
-            printf("%f ", E[kk][ll]);
+            printf("%f ", D[kk][ll]);
 	}
 	printf("\n");
     }
@@ -111,15 +109,15 @@ int main() {
     printf("Before inPlaceCacheObliviousTranspose() \n");
     for (kk = 0; kk < N; kk++) {
         for (ll = 0; ll < N; ll ++) {
-            printf("%f ", F[kk][ll]);
+            printf("%f ", E[kk][ll]);
 	}
 	printf("\n");
     }
-    inPlaceCacheObliviousTranspose(0, N, 0, N,(double*) F);
+    inPlaceCacheObliviousTranspose(0, N, 0, N,(double*) E);
     printf("After inPlaceCacheObliviousTranspose()\n");
     for (kk = 0; kk < N; kk++) {
         for (ll = 0; ll < N; ll++) {
-            printf("%f ", F[kk][ll]);
+            printf("%f ", E[kk][ll]);
 	}
 	printf("\n");
     }
