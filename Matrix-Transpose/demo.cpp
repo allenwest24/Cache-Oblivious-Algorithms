@@ -13,17 +13,6 @@ void transpose(double* A, double* B) {
     }
 }
 
-void inPlaceTranspose(double* A) { 
-    int ii, jj; 
-    for (ii = 0; ii < N; ii++) { 
-        for (jj = 0; jj < N; jj++) { 
-            double tmp = A[(N * ii) + jj];
-	    A[(N * ii) + jj] = A[(N * jj) + ii];
-            A[(N * jj) + ii] = tmp;
-	} 
-    }
-}
-
 void cacheObliviousTranspose(int x, int hix, int y, int hiy, double* matrix, double* out) {
     if ((hix == 1) && (hiy == 1)) {
 	if(x < y) {
@@ -101,22 +90,6 @@ int main() {
 	}
 	printf("\n");
     }
-	
-    printf("Before inPlaceTranspose() \n");
-    for (kk = 0; kk < N; kk++) {
-        for (ll = 0; ll < N; ll++) {
-            printf("%f ", C[kk][ll]);
-	}
-	printf("\n");
-    }
-    inPlaceTranspose((double *)C);
-    printf("After inPlaceTranspose() \n"); 
-    for (kk = 0; kk < N; kk++) { 
-        for (ll = 0; ll < N; ll++) {
-            printf("%f ", C[kk][ll]);  
-	}
-	printf("\n");
-    } 
 	
     printf("Before cacheObliviousTranspose() \n");
     for (kk = 0; kk < N; kk++) {
