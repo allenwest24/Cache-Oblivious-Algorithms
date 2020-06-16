@@ -6,7 +6,7 @@
 
 Implemented a cache-oblivious matrix multiply algorithm and used the Google Benchmark framework to measure it.
 
-# Resources to help
+# Resources Used
 
 Below are a list of curated resources that helped me along the way. Consult them (read them, or do <kbd>ctrl+f</kbd> for keywords) if you would like to understand more.
 
