@@ -17,7 +17,7 @@ void CacheObliviousTransposition(int x, int delx, int y, int dely, double* matri
     if ((delx == 1) && (dely == 1)) {
         if(x<y)
         {
-            int tmp = matrix[(N*y) + x];
+            double tmp = matrix[(N*y) + x];
             matrix[(N*y) + x] = matrix[(N*x) + y];
             matrix[(N*x) + y] = tmp;
         }
