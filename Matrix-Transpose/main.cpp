@@ -1,7 +1,10 @@
 #include <stdio.h> 
 #include <stdlib.h>
+#include <sys/time.h>
+#include <benchmark/benchmark.h>
 
-#define N 4
+// Set to a value of 2
+#define N 512
   
 void transpose(double* A, double* B) { 
     int ii, jj; 
@@ -54,25 +57,50 @@ void inPlaceCacheObliviousTranspose(int x, int hix, int y, int hiy, double* matr
     inPlaceCacheObliviousTranspose(x, hix, y, ymid, matrix);
     inPlaceCacheObliviousTranspose(x, hix, y + ymid, hiy - ymid, matrix);
 }
-  
-int main() { 
+
+static void BM_transpose(benchmark::State& state) {
     double A[N][N];
     double B[N][N];
-    double C[N][N];
-    double D[N][N];
-    double E[N][N];
+    // Initialize array
     for(int ii = 0; ii < N; ++ii){
         for(int jj = 0; jj < N; ++jj){
             A[ii][jj] = (double)rand() / (double)RAND_MAX;
             B[ii][jj] = (double)rand() / (double)RAND_MAX;
+	}
+    }
+    for (auto _ : state)
+	transpose((double *)A, (double *)B);
+}
+
+static void BM_cacheObliviousTranspose(benchmark::State& state) {
+    double C[N][N];
+    double D[N][N];
+	
+    // Initialize array
+    for(int ii = 0; ii < N; ++ii){
+        for(int jj = 0; jj < N; ++jj){
 	    C[ii][jj] = (double)rand() / (double)RAND_MAX;
             D[ii][jj] = (double)rand() / (double)RAND_MAX;
+        }
+    }
+    for (auto _ : state)
+	cacheObliviousTranspose(0, N, 0, N,(double*) C, (double*) D);
+}
+
+static void BM_inPlaceCacheObliviousTranspose(benchmark::State& state) {
+    double E[N][N];
+	
+    // Initialize array
+    for(int ii = 0; ii < N; ++ii){
+        for(int jj = 0; jj < N; ++jj){
             E[ii][jj] = (double)rand() / (double)RAND_MAX;
         }
     }
-    transpose((double *)A, (double *)B);
-    cacheObliviousTranspose(0, N, 0, N,(double*) C, (double*) D);
-    inPlaceCacheObliviousTranspose(0, N, 0, N,(double*) E);
-  
-    return 0; 
-} 
+	for (auto _ : state) 
+    	    inPlaceCacheObliviousTranspose(0, N, 0, N,(double*) E);
+}
+
+BENCHMARK(BM_transpose);
+BENCHMARK(BM_cacheObliviousTranspose);
+BENCHMARK(BM_inPlaceCacheObliviousTranspose);
+BENCHMARK_MAIN();
