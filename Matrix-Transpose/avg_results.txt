@@ -1,0 +1,12 @@
+user@user-VirtualBox:~/Desktop/matrix_transpose$ vim main.cpp
+user@user-VirtualBox:~/Desktop/matrix_transpose$ g++ main.cpp -lbenchmark -lpthread -O3 -o transpose_time
+user@user-VirtualBox:~/Desktop/matrix_transpose$ ./transpose_time 
+
+----------------------------------------------------------------------------------
+Benchmark                                        Time             CPU   Iterations
+----------------------------------------------------------------------------------
+BM_transpose                               3077225 ns      3073976 ns          236
+BM_cacheObliviousTranspose                 1436725 ns      1436173 ns          472
+BM_inPlaceCacheObliviousTranspose          1193995 ns      1188981 ns          575
+BM_inPlaceCacheObliviousTranspose_SIMD2     530173 ns       530033 ns         1370
+BM_inPlaceCacheObliviousTranspose_SIMD4     376333 ns       376291 ns         1753
