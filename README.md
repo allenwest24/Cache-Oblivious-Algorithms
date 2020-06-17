@@ -4,5 +4,5 @@ Cache-Oblivious algorithms are algorithms deisgned to take advantage of a CPU ca
 ### Contents:
 
 - Enclosed in this folder are two demonstrations of the speedups from utilizing cache-oblivious algorithms to improve performance. 
-- Complete with reults, demos, and reports.
+- Complete with results, demos, and reports.
 - Included is resources to follow up on any questions that may arrise.
